@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="script.js" defer></script>
+    <title>Eggplant test</title>
+    <link href="./style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <header>
+      Eggplant test
+    </header>
+    <section class="entryform" style="margin-top: 32px;">
+      <table>
+        <tr>
+          <td>
+            <label for="name">Name:</label>
+          </td>
+          <td>
+            <input id="name" name="name" class="formfield" type="text" min=1 max=64>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="dob">Date of birth:</label>
+          </td>
+          <td>
+            <input id="dob" name="dob" class="formfield" type="date">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="email">email:</label>
+          </td>
+          <td>
+            <input id="email" name="email" class="formfield" type="email">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="children">Num. of children:</label>
+          </td>
+          <td>
+            <input id="children" name="children" class="formfield" type="number" min="0"  value=0>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          </td>
+          <td class="addtodb">
+            Add to DB
+          </td>
+      </table>
+    </section>
+    <section class="datasection" style="margin-top: 32px;">
+      <p id="sortingby">Sorting by xyz asc</p>
+      <table id="data">
+        <tr class="sort">
+          <th class="sortname">Name</th>
+          <th class="sortbirth">Birth</th>
+          <th class="sortemail">email</th>
+          <th class="sortchildren">Children</th>
+        </tr>
+        <tr class="entry">
+          <td>Joe</td>
+          <td>01/04/1999</td>
+          <td>joe@example.com</td>
+          <td>1</td>
+        </tr>
+        <tr class="pagination">
+          <td class="pagfirst"> |<= </td>
+          <td class="pagprev"> <= </td>
+          <td class="pagnext"> => </td>
+          <td class="paglast"> =>| </td>
+        </tr>
+      </table>
+    </section>
+    <section class="filtersection" style="margin-top: 32px;">
+      <label for="filter">Filter:</label>
+      <input id="filter" name="filter" type="text"><br>
+    </section>
+  </body>
+</html>
