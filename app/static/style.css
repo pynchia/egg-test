@@ -23,6 +23,10 @@ td.addtodb {
 	cursor: pointer;
 }
 
+p#sortingby {
+	color: green;
+	font-weight: bold;
+}
 tr.sort {
 	text-align: left;
 	color: #f0f0f0;
