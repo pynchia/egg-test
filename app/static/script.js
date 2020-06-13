@@ -1,18 +1,14 @@
 const entriesURI = "http://backend/entries";
 
-let doors = [];
+const formToJSON = elements => [].reduce.call(elements, (data, el) => {
+	data[el.name] = el.value;
+	return data;
+  }, {});
 
-// const nameEl = document.getElementById("name");
-// const birthEl = document.getElementById("birth");
-// const emailEl = document.getElementById("email");
-// const childrenEl = document.getElementById("children");
 const add_button = document.getElementById("addtodb");
 add_button.onclick = event => {
 	const formEls = document.getElementsByClassName("formfield");
-	Array.from(formEls).forEach((el) => {
-		// collecting all fields and their values
-		console.log(el.name, el.value);
-	});
+	console.log(formToJSON(formEls));
 }
 
 const current_sort = {
