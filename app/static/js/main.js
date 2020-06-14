@@ -1,4 +1,4 @@
-const entriesURI = "http://backend/entries";
+const entriesURI = "http://localhost:8000/entries";
 
 const add_button = document.getElementById("addtodb");
 add_button.onclick = event => {
