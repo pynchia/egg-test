@@ -1,14 +1,13 @@
 const entriesURI = "http://backend/entries";
 
-const formToJSON = elements => [].reduce.call(elements, (data, el) => {
-	data[el.name] = el.value;
-	return data;
-  }, {});
-
 const add_button = document.getElementById("addtodb");
 add_button.onclick = event => {
 	const formEls = document.getElementsByClassName("formfield");
-	console.log(formToJSON(formEls));
+	// console.log();
+	postData(entriesURI, formToJSON(formEls))
+	.then(data => {
+		console.log(data); // JSON data parsed by `response.json()` call
+	});
 }
 
 const current_sort = {
