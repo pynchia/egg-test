@@ -4,15 +4,15 @@ const formToJSON = elements => [].reduce.call(elements, (data, el) => {
 	return data;
   }, {});
 
-async function postData(url='', data={}) {
-    // Default options are marked with *
-    const response = await fetch(url, {
+async function postData(uri='', data) {
+    let json_data = JSON.stringify(data);
+    console.log(`POST ${uri}, ${json_data}`);
+    const response = await fetch(uri, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json;charset=utf-8'
         },
-        mode: 'same-origin',
-        body: JSON.stringify(data)
+        body: json_data
     });
     if (response.ok) { // HTTP-status is 200-299
         try {

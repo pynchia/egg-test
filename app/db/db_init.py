@@ -10,9 +10,9 @@ async def main():
     # Create a table.
     query = """
     CREATE TABLE users (
-    `id` INTEGER PRIMARY KEY,
+    `id` INTEGER PRIMARY KEY AUTOINCREMENT,
     `name` VARCHAR(64) NOT NULL,
-    `birth` DATE NOT NULL,
+    `birth` VARCHAR(16) NOT NULL,
     `email` VARCHAR(64) NULL DEFAULT NULL,
     `children` INTEGER NOT NULL DEFAULT 0
     );

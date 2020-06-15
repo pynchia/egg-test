@@ -2,27 +2,28 @@ from fastapi import FastAPI
 
 from handlers.static import register_static_handlers
 from handlers.users import register_user_handlers
-from storage.service import UserService
-from storage.connectors.sqllite import SQLite
+from storage.services import UserService
+from storage.connectors.sqllite import SQLiteUsers
 
 
-DATABASE_URI = 'sqlite:///egg-test.db'
+DATABASE_URI = 'sqlite:///./db/egg-test.db'
 PAGE_SIZE = 15
 
 
 def init_app():
     app = FastAPI()
-    database = SQLite(DATABASE_URI)
-    user_service = UserService(database, PAGE_SIZE)
+    users_db_connector = SQLiteUsers(DATABASE_URI)
+    user_service = UserService(users_db_connector, PAGE_SIZE)
     register_static_handlers(app)
     register_user_handlers(app, user_service)
+
     @app.on_event("startup")
     async def startup():
-        await database.connect()
+        await users_db_connector.connect()
 
     @app.on_event("shutdown")
     async def shutdown():
-        await database.disconnect()
+        await users_db_connector.disconnect()
     return app
 
 app = init_app()

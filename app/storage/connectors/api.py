@@ -5,7 +5,7 @@ independent of kind of DB used
 """
 
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, Protocol
 
 
 class SaveError(Exception):
@@ -15,6 +15,7 @@ class SaveError(Exception):
 class DBConnector(ABC):
     """
     Basic interface to a DB engine every connector must implement.
+    There would be one per resource.
     Instantiate with params:
     db uri or path
     """
@@ -36,11 +37,10 @@ class DBConnector(ABC):
         ...
 
     @abstractmethod
-    async def add(self, res_name: str, resource: dict) -> dict:
+    async def add(self, resource) -> dict:
         """
         Add the resource to the DB
         Params
-         res_name = the name of the resource
          resource = the resource itself
         Return:
          the newly added resource
@@ -48,7 +48,7 @@ class DBConnector(ABC):
         ...
 
     @abstractmethod
-    async def read_many(self, res_name: str, criteria: dict, how_many: int, offeset: int) -> List[dict]:
+    async def read_many(self, criteria: dict, how_many: int, offset: int):
         """
         Read the resources from the DB according to
          the given criteria 
@@ -66,9 +66,10 @@ class DBConnector(ABC):
 #
 #
 # @runtime_checkable
-# class DBConnector(ABC):
+# class DBConnector(Protocol):
 #     """
 #     Basic interface to a DB engine every connector must implement.
+#     There would be one per resource.
 #     Instantiate with params:
 #     db uri or path
 #     """
@@ -87,15 +88,17 @@ class DBConnector(ABC):
 #         """
 #         ...
 
-#     async def add(self, res_name: str) -> dict:
+#     async def add(self, resource) -> dict:
 #         """
 #         Add the resource to the DB
+#         Params
+#          resource = the resource itself
 #         Return:
 #          the newly added resource
 #         """
 #         ...
 
-#     async def read_many(self, res_name: str, criteria: dict, how_many: int, offeset: int) -> List[dict]:
+#     async def read_many(self, criteria: dict, how_many: int, offset: int):
 #         """
 #         Read the resources from the DB according to
 #          the given criteria 
