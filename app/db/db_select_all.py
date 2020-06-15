@@ -10,7 +10,8 @@ async def main():
     # Run a database query.
     query = "SELECT * FROM users"
     rows = await database.fetch_all(query=query)
-    print('entries:', rows)
+    for row in rows:
+        print(row)
 
     await database.disconnect()
 
