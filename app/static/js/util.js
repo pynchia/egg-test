@@ -7,11 +7,12 @@ const formToJSON = elements => [].reduce.call(elements, (data, el) => {
 async function postData(url='', data={}) {
     // Default options are marked with *
     const response = await fetch(url, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        method: 'POST',
         headers: {
         'Content-Type': 'application/json;charset=utf-8'
         },
-        body: JSON.stringify(data) // body data type must match "Content-Type" header
+        mode: 'same-origin',
+        body: JSON.stringify(data)
     });
     if (response.ok) { // HTTP-status is 200-299
         try {

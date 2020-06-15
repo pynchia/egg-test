@@ -1,12 +1,28 @@
 from fastapi import FastAPI
-from fastapi.responses import FileResponse
-from fastapi.staticfiles import StaticFiles
 
-app = FastAPI()
+from handlers.static import register_static_handlers
+from handlers.users import register_user_handlers
+from storage.service import UserService
+from storage.connectors.sqllite import SQLite
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
-@app.get("/")
-def index():
-  return FileResponse('static/index.html')
-    # return {"message": "Hello World"}
+DATABASE_URI = 'sqlite:///egg-test.db'
+PAGE_SIZE = 15
+
+
+def init_app():
+    app = FastAPI()
+    database = SQLite(DATABASE_URI)
+    user_service = UserService(database, PAGE_SIZE)
+    register_static_handlers(app)
+    register_user_handlers(app, user_service)
+    @app.on_event("startup")
+    async def startup():
+        await database.connect()
+
+    @app.on_event("shutdown")
+    async def shutdown():
+        await database.disconnect()
+    return app
+
+app = init_app()

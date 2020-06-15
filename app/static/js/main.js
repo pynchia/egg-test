@@ -1,10 +1,10 @@
-const entriesURI = "http://localhost:8000/entries";
+const usersURI = "http://localhost:8000/users";
 
 const add_button = document.getElementById("addtodb");
 add_button.onclick = event => {
 	const formEls = document.getElementsByClassName("formfield");
 	// console.log();
-	postData(entriesURI, formToJSON(formEls))
+	postData(usersURI, formToJSON(formEls))
 	.then(data => {
 		console.log(data); // JSON data parsed by `response.json()` call
 	});
