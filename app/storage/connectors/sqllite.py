@@ -39,7 +39,7 @@ class SQLiteUsers(DBConnector):
         values['birth'] = datetime.strptime(user.birth, '%Y-%m-%d')
         query = self.users.insert().values(**values)
         last_record_id = await self.db.execute(query)
-        values['birth'] = datetime.strftime('%d-%m-%Y')
+        values['birth'] = values['birth'].strftime('%Y-%m-%d')
         return {**values, "id": last_record_id}
 
     async def read_many(self, criteria: dict, how_many: int, offset: int) -> List[User]:
