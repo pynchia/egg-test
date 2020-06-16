@@ -7,6 +7,7 @@ add_button.onclick = event => {
 	postData(usersURI, formToJSON(formEls))
 	.then(data => {
 		console.log(data); // JSON data parsed by `response.json()` call
+		refreshTable()
 	});
 }
 
@@ -21,13 +22,13 @@ function updateSortByEl(sort) {
 }
 
 function refreshTable() {
-	let users_template = Handlebars.compile(document.getElementById("usertemplate").innerHTML);
 	let rows = getData(usersURI);
-	console.log(rows);
-	let context = {users: rows};
-	const compiledHTML = users_template(context);
-	console.log(compiledHTML);
-	document.getElementById("usertable").innerHTML = compiledHTML;
+	rows.then(data => {
+		console.log(data);
+		let context = {users: data};
+		const compiledHTML = users_template(context);
+		document.getElementById("usertable").innerHTML = compiledHTML;
+	});
 }
 
 function main() {
@@ -35,6 +36,6 @@ function main() {
 	refreshTable();
 }
 
-
+let users_template = Handlebars.compile(document.getElementById("usertemplate").innerHTML);
 
 main();
