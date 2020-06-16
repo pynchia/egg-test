@@ -45,7 +45,7 @@ tr.pagination {
 	background-color: #202090;
 }
 
-th.sortname, th.sortbirth, th.sortemail, th.sortchildren {
+th.sortcol {
 	cursor: pointer;
 }
 

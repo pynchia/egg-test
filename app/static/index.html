@@ -12,30 +12,6 @@
     <header>
       Eggplant test
     </header>
-    <script id="usertemplate" type="text/x-handlebars-template">
-      <table id="data">
-        <tr class="sort">
-          <th class="sortname">Name</th>
-          <th class="sortbirth">Birth</th>
-          <th class="sortemail">email</th>
-          <th class="sortchildren">Children</th>
-        </tr>
-        {{#each users}}
-          <tr class="entry">
-            <td>{{name}}</td>
-            <td>{{birth}}</td>
-            <td>{{email}}</td>
-            <td>{{children}}</td>
-          </tr>
-        {{/each}}
-        <tr class="pagination">
-          <td class="pagfirst"> |<= </td>
-          <td class="pagprev"> <= </td>
-          <td class="pagnext"> => </td>
-          <td class="paglast"> =>| </td>
-        </tr>
-      </table>
-    </script>
     <section class="userform" style="margin-top: 32px;">
       <table>
         <tr>
@@ -87,5 +63,29 @@
       <label for="filter">Filter (name or email):</label>
       <input id="filter" name="filter" type="text"><br>
     </section>
-  </body>
+    <script id="usertemplate" type="text/x-handlebars-template">
+      <table id="data">
+        <tr class="sort">
+          <th class="sortcol">Name</th>
+          <th class="sortcol">Birth</th>
+          <th class="sortcol">email</th>
+          <th class="sortcol">Children</th>
+        </tr>
+        {{#each users}}
+          <tr class="entry">
+            <td>{{name}}</td>
+            <td>{{birth}}</td>
+            <td>{{email}}</td>
+            <td>{{children}}</td>
+          </tr>
+        {{/each}}
+        <tr class="pagination">
+          <td class="pagfirst"> |<= </td>
+          <td class="pagprev"> <= </td>
+          <td class="pagnext"> => </td>
+          <td class="paglast"> =>| </td>
+        </tr>
+      </table>
+    </script>
+    </body>
 </html>
