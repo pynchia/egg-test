@@ -24,8 +24,8 @@ async def main():
     query = """INSERT INTO users(name, birth, email, children)
                 VALUES (:name, :birth, :email, :children)"""
     values = [
-        {"name": "Joe Doe", "birth": "2020-06-01", "email": "joe@example.com", "children": 1},
-        {"name": "Tip Tap", "birth": "2020-06-02", "email": "tip@example.com", "children": 2},
+        {"name": "Joe", "birth": "01-01-2020", "email": "joe@example.com", "children": 1},
+        {"name": "Tip", "birth": "01-01-1999", "email": "tip@example.com", "children": 2},
     ]
     await database.execute_many(query=query, values=values)
 

@@ -25,7 +25,8 @@ async function postData(uri='', data) {
     }
 }
 
-async function getData(uri='') {
+async function getData(uri) {
+    // console.log(`GET ${uri}`);
     const response = await fetch(uri);
     if (response.ok) { // HTTP-status is 200-299
         try {

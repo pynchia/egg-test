@@ -17,7 +17,7 @@ class SQLiteUsers(DBConnector):
             metadata,
             sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
             sqlalchemy.Column("name", sqlalchemy.String),
-            sqlalchemy.Column("birth", sqlalchemy.Date),
+            sqlalchemy.Column("birth", sqlalchemy.String),
             sqlalchemy.Column("email", sqlalchemy.String),
             sqlalchemy.Column("children", sqlalchemy.Integer),
         )
@@ -27,24 +27,18 @@ class SQLiteUsers(DBConnector):
         metadata.create_all(engine)
 
     async def connect(self):
-        print("********** Connecting")
         await self.db.connect()
 
     async def disconnect(self):
-        print("********** Disconnecting")
         await self.db.disconnect()
 
     async def add(self, user):
         values = user.dict()
-        values['birth'] = datetime.strptime(user.birth, '%Y-%m-%d')
+        values['birth'] = datetime.strptime(user.birth, '%Y-%m-%d').strftime('%d-%m-%Y')
         query = self.users.insert().values(**values)
         last_record_id = await self.db.execute(query)
-        values['birth'] = values['birth'].strftime('%Y-%m-%d')
         return {**values, "id": last_record_id}
 
     async def read_many(self, criteria: dict, how_many: int, offset: int) -> List[User]:
-        print("********** Reading many users:", criteria, how_many, offset)
-        query = notes.select()
-        return await database.fetch_all(query)
-        # .strftime('%d-%m-%Y')
-        
+        query = self.users.select()
+        return await self.db.fetch_all(query)

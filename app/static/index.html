@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <script src="static/js/util.js" defer></script>
     <script src="static/js/main.js" defer></script>
     <title>Eggplant test</title>
@@ -11,6 +12,30 @@
     <header>
       Eggplant test
     </header>
+    <script id="usertemplate" type="text/x-handlebars-template">
+      <table id="data">
+        <tr class="sort">
+          <th class="sortname">Name</th>
+          <th class="sortbirth">Birth</th>
+          <th class="sortemail">email</th>
+          <th class="sortchildren">Children</th>
+        </tr>
+        {{#each users}}
+          <tr class="entry">
+            <td>{{name}}</td>
+            <td>{{birth}}</td>
+            <td>{{email}}</td>
+            <td>{{children}}</td>
+          </tr>
+        {{/each}}
+        <tr class="pagination">
+          <td class="pagfirst"> |<= </td>
+          <td class="pagprev"> <= </td>
+          <td class="pagnext"> => </td>
+          <td class="paglast"> =>| </td>
+        </tr>
+      </table>
+    </script>
     <section class="userform" style="margin-top: 32px;">
       <table>
         <tr>
@@ -55,26 +80,8 @@
     </section>
     <section class="datasection" style="margin-top: 32px;">
       <p id="sortby">Sorting by xyz asc</p>
-      <table id="data">
-        <tr class="sort">
-          <th class="sortname">Name</th>
-          <th class="sortbirth">Birth</th>
-          <th class="sortemail">email</th>
-          <th class="sortchildren">Children</th>
-        </tr>
-        <tr class="entry">
-          <td>Joe</td>
-          <td>01/04/1999</td>
-          <td>joe@example.com</td>
-          <td>1</td>
-        </tr>
-        <tr class="pagination">
-          <td class="pagfirst"> |<= </td>
-          <td class="pagprev"> <= </td>
-          <td class="pagnext"> => </td>
-          <td class="paglast"> =>| </td>
-        </tr>
-      </table>
+      <div id="usertable">
+      </div>
     </section>
     <section class="filtersection" style="margin-top: 32px;">
       <label for="filter">Filter (name or email):</label>

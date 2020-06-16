@@ -20,9 +20,21 @@ function updateSortByEl(sort) {
 	sortByEl.innerHTML = `Sorting by ${sort.column} ${sort.direction}`;
 }
 
+function refreshTable() {
+	let users_template = Handlebars.compile(document.getElementById("usertemplate").innerHTML);
+	let rows = getData(usersURI);
+	console.log(rows);
+	let context = {users: rows};
+	const compiledHTML = users_template(context);
+	console.log(compiledHTML);
+	document.getElementById("usertable").innerHTML = compiledHTML;
+}
+
 function main() {
 	updateSortByEl(current_sort);
-
+	refreshTable();
 }
+
+
 
 main();
