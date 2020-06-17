@@ -7,6 +7,16 @@
     <title>Eggplant test</title>
     <link href="static/css/style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet" type="text/css">
+    <script id="usertemplate" type="text/x-handlebars-template">
+      {{#each users}}
+        <tr class="entry">
+          <td>{{name}}</td>
+          <td>{{birth}}</td>
+          <td>{{email}}</td>
+          <td>{{children}}</td>
+        </tr>
+      {{/each}}
+  </script>
   </head>
   <body>
     <header>
@@ -57,35 +67,29 @@
     <section class="datasection" style="margin-top: 32px;">
       <p id="sortby">Sorting by xyz asc</p>
      <table id="data">
+       <thead>
         <tr class="sort">
           <th class="sortcol" id="name">Name</th>
           <th class="sortcol" id="birth">Birth</th>
           <th class="sortcol" id="email">email</th>
           <th class="sortcol" id="children">Children</th>
         </tr>
-        <section id="userentries">
-        </section>
+       </thead>
+       <tbody id="userentries">
+       </tbody>
+       <tfoot>
         <tr class="pagination">
           <td class="pagfirst"> |<= </td>
           <td class="pagprev"> <= </td>
           <td class="pagnext"> => </td>
           <td class="paglast"> =>| </td>
         </tr>
+       </tfoot>
       </table>
     </section>
     <section class="filtersection" style="margin-top: 32px;">
       <label for="filter">Filter (name or email):</label>
       <input id="filter" name="filter" type="text"><br>
     </section>
-    <script id="usertemplate" type="text/x-handlebars-template">
-        {{#each users}}
-          <tr class="entry">
-            <td>{{name}}</td>
-            <td>{{birth}}</td>
-            <td>{{email}}</td>
-            <td>{{children}}</td>
-          </tr>
-        {{/each}}
-    </script>
     </body>
 </html>
