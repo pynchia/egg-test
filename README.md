@@ -2,19 +2,17 @@
 
 A test
 
-## Setup (if no docker)
+## Setup and execution of backend
 
-`cd egg-test/`
+Go to the root `eggtest` directory and build the docker image
 
-`python3 venv -m .venv`
+`docker build -t eggapp .`
 
-`. .venv/bin/activate`
+Launch it
 
-`cd app/`
+`docker run -it -p 8000:8000 eggapp`
 
-`uvicorn main:app --reload`
-
-## Web access
+## Web access to frontend
 
 point your browser to `http://localhost:8000/`
 
