@@ -2,7 +2,6 @@
 <html>
   <head>
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-    <script src="static/js/util.js" defer></script>
     <script src="static/js/main.js" defer></script>
     <title>Eggplant test</title>
     <link href="static/css/style.css" rel="stylesheet" type="text/css">
@@ -56,21 +55,28 @@
     </section>
     <section class="datasection" style="margin-top: 32px;">
       <p id="sortby">Sorting by xyz asc</p>
-      <div id="usertable">
-      </div>
+     <table id="data">
+        <tr class="sort">
+          <th class="sortcol" id="name">Name</th>
+          <th class="sortcol" id="birth">Birth</th>
+          <th class="sortcol" id="email">email</th>
+          <th class="sortcol" id="children">Children</th>
+        </tr>
+        <section id="userentries">
+        </section>
+        <tr class="pagination">
+          <td class="pagfirst"> |<= </td>
+          <td class="pagprev"> <= </td>
+          <td class="pagnext"> => </td>
+          <td class="paglast"> =>| </td>
+        </tr>
+      </table>
     </section>
     <section class="filtersection" style="margin-top: 32px;">
       <label for="filter">Filter (name or email):</label>
       <input id="filter" name="filter" type="text"><br>
     </section>
     <script id="usertemplate" type="text/x-handlebars-template">
-      <table id="data">
-        <tr class="sort">
-          <th class="sortcol">Name</th>
-          <th class="sortcol">Birth</th>
-          <th class="sortcol">email</th>
-          <th class="sortcol">Children</th>
-        </tr>
         {{#each users}}
           <tr class="entry">
             <td>{{name}}</td>
@@ -79,13 +85,6 @@
             <td>{{children}}</td>
           </tr>
         {{/each}}
-        <tr class="pagination">
-          <td class="pagfirst"> |<= </td>
-          <td class="pagprev"> <= </td>
-          <td class="pagnext"> => </td>
-          <td class="paglast"> =>| </td>
-        </tr>
-      </table>
     </script>
     </body>
 </html>
