@@ -25,9 +25,16 @@ async function postData(uri='', data) {
     }
 }
 
-async function getData(uri) {
-    // console.log(`GET ${uri}`);
-    const response = await fetch(uri);
+async function getData(uri, params) {
+    // console.log(`GET ${uri} ${params}`);
+    function formatParams() {
+        const formatted = new URLSearchParams(params).toString();
+        return "?"+formatted;
+    }
+
+
+    const response = await fetch(uri+formatParams());
+
     if (response.ok) { // HTTP-status is 200-299
         try {
             return await response.json();

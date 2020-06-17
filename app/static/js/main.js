@@ -1,7 +1,12 @@
 const usersURI = "http://localhost:8000/users";
 
 function refreshTable() {
-	let rows = getData(usersURI);
+	const params = {
+		filter: document.getElementById("filter").value,
+		sortby: current_sort.column,
+		sortdir: current_sort.direction
+	}
+	let rows = getData(usersURI, params);
 	rows.then(data => {
 		let context = {users: data};
 		const users_template = Handlebars.compile(document.getElementById("usertemplate").innerHTML);
@@ -21,7 +26,7 @@ add_button.onclick = event => {
 
 const current_sort = {
 	column: "name",
-	direction: "Asc",
+	direction: "asc",
 }
 const sortByEl = document.getElementById("sortby");
 
@@ -34,9 +39,9 @@ function setupSorting() {
 	for (var el of sort_cols) {
 		el.onclick = event => {
 			if (current_sort.column === event.target.id) {
-				current_sort.direction = current_sort.direction === "Asc" ? "Desc": "Asc";
+				current_sort.direction = current_sort.direction === "asc" ? "desc": "asc";
 			} else {
-				current_sort.direction = "Asc";
+				current_sort.direction = "asc";
 				current_sort.column = event.target.id;
 			}
 			updateSortByEl(current_sort);
