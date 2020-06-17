@@ -20,9 +20,9 @@ setup(
     packages=find_packages(),
     include_package_data=False,
     zip_safe=False,
-    entry_points="""
-    [console_scripts]
-    appcli = eggtest.cli:cli
-    """,
+    # entry_points="""
+    # [console_scripts]
+    # appcli = eggtest.cli:cli
+    # """,
     install_requires=[]
 )
