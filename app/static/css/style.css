@@ -27,6 +27,7 @@ p#sortingby {
 	color: green;
 	font-weight: bold;
 }
+
 tr.sort {
 	text-align: left;
 	color: #f0f0f0;
@@ -49,6 +50,11 @@ th.sortcol {
 	cursor: pointer;
 }
 
-td.pagfirst, td.pagprev, td.pagnext, td.paglast {
+td.pagcell {
 	cursor: pointer;
+}
+
+td#currentpage {
+	font-weight: bold;
+	text-align: center;
 }

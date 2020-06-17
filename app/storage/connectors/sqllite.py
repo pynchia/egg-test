@@ -4,7 +4,7 @@ from typing import List, Literal
 
 import databases
 import sqlalchemy
-from sqlalchemy.sql import select, or_
+from sqlalchemy.sql import select, or_, desc, asc
 
 
 from storage.connectors.api import DBConnector
@@ -48,10 +48,11 @@ class SQLiteUsers(DBConnector):
         search_filter:str, sort_by:str, sort_dir: Literal['asc', 'desc'],
         page:int, pagesize:int) -> List[dict]:
 
+        direction = desc if sort_dir == 'desc' else asc
         query = self.users.select().where(
             or_(
                 self.users.c.name.ilike('%'+search_filter+'%'),
                 self.users.c.email.ilike('%'+search_filter+'%')
             )
-        ).limit(pagesize).offset(page*pagesize)
+        ).order_by(direction(getattr(self.users.c, sort_by))).limit(pagesize).offset(page*pagesize)
         return await self.db.fetch_all(query)
