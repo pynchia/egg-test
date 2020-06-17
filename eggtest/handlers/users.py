@@ -3,7 +3,7 @@ from typing import List, Union
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-from storage.models import UserIn, User
+from eggtest.storage.models import UserIn, User
 
 
 def register_user_handlers(app, service):

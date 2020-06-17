@@ -1,6 +1,6 @@
 from typing import List, Literal
 
-from storage.models import UserIn, User
+from eggtest.storage.models import UserIn, User
 
 
 class UserService:

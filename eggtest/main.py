@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 
-from handlers.static import register_static_handlers
-from handlers.users import register_user_handlers
-from storage.services import UserService
-from storage.connectors.sqllite import SQLiteUsers
+from eggtest.handlers.static import register_static_handlers
+from eggtest.handlers.users import register_user_handlers
+from eggtest.storage.services import UserService
+from eggtest.storage.connectors.sqllite import SQLiteUsers
 
 
 DATABASE_URI = 'sqlite:///./db/egg-test.db'

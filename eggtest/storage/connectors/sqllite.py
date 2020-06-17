@@ -6,9 +6,8 @@ import databases
 import sqlalchemy
 from sqlalchemy.sql import select, or_, desc, asc
 
-
-from storage.connectors.api import DBConnector
-from storage.models import User
+from eggtest.storage.connectors.api import DBConnector
+from eggtest.storage.models import User
 
 logger = logging.getLogger("api")
 
