@@ -6,7 +6,7 @@ from eggtest.storage.services import UserService
 from eggtest.storage.connectors.sqllite import SQLiteUsers
 
 
-DATABASE_URI = 'sqlite:///./db/egg-test.db'
+DATABASE_URI = 'sqlite:///./eggtest/db/egg-test.db'
 
 
 def init_app():

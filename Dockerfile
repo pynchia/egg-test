@@ -7,17 +7,17 @@ WORKDIR /app
 # RUN pip install -U pip
 RUN pip install --user -r requirements.txt
 COPY . /app
-# # Install the application package
-# RUN pip install --user .
-# # Run the tests
-# CMD ./run-tests.sh
+# Install the application package
+RUN pip install --user .
+# Run the tests
+CMD ./run-tests.sh
 
 # the production image
 FROM python:3.8.0-slim as app
+# Copy the packages
 COPY --from=pybuild /root/.local /root/.local
 
-# Copy the /app dir as well? It's not installed, it must
-# be reached by uvcorn
+# unnecessary if uvicorn finds it in eggtest
 # COPY --from=pybuild /app /app
 
 WORKDIR /app
