@@ -10,6 +10,7 @@ chardet==3.0.4
 click==7.1.2
 databases==0.3.2
 dnspython==1.16.0
+# -e git+git@github.com:pynchia/egg-test.git@8996c7987a761a6f107415e7fe95392ca508009d#egg=eggtest
 email-validator==1.1.1
 fastapi==0.57.0
 graphene==2.1.8
