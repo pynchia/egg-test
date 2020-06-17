@@ -2,7 +2,7 @@ const usersURI = "http://localhost:8000/users";
 
 function refreshTable() {
 	const params = {
-		searchfilter: document.getElementById("filter").value,
+		searchfilter: filterEl.value,
 		sortby: current_sort.column,
 		sortdir: current_sort.direction,
 		page: currentPage,
@@ -14,17 +14,7 @@ function refreshTable() {
 		const users_template = Handlebars.compile(document.getElementById("usertemplate").innerHTML);
 		const compiledHTML = users_template(context);
 		document.getElementById("userentries").innerHTML = compiledHTML;
-		if (data.length < PAGESIZE) {
-			nextPageEl.style.cursor = "not-allowed";
-		}
-		if (currentPage > 0) { // enable the first and prev paging
-			firstPageEl.style.cursor = "pointer";
-			prevPageEl.style.cursor = "pointer";
-		} else { // first page, disable the first and prev buttons
-			firstPageEl.style.cursor = "not-allowed";
-			prevPageEl.style.cursor = "not-allowed";
-		}
-
+		setupPaging(data.length);
 	});
 }
 
@@ -72,33 +62,49 @@ function setupSorting() {
 }
 
 const firstPageEl = document.getElementById("pagfirst");
-firstPageEl.style.cursor = "not-allowed";  // disabled initially
 const prevPageEl = document.getElementById("pagprev");
-prevPageEl.style.cursor = "not-allowed";  // disabled initially
 const nextPageEl = document.getElementById("pagnext");
 const lastPageEl = document.getElementById("paglast");
 lastPageEl.style.cursor = "not-allowed";  // disabled for now
-function setupPaging() {
-	firstPageEl.onclick = event => {
-		setCurrentPage(0);
-		refreshTable();
-	}
-	prevPageEl.onclick = event => {
-		if (currentPage > 0) {
-			setCurrentPage(currentPage-1);
+function setupPaging(numEntries) {
+	console.log(numEntries)
+	if (numEntries < PAGESIZE) {
+		nextPageEl.style.cursor = "not-allowed";
+		nextPageEl.onclick = () => false;
+	} else {
+		nextPageEl.style.cursor = "pointer";
+		nextPageEl.onclick = event => {
+			setCurrentPage(currentPage+1);
 			refreshTable();
 		}
 	}
-	nextPageEl.onclick = event => {
-		setCurrentPage(currentPage+1);
-		refreshTable();
+	if (currentPage > 0) { // enable the first and prev paging
+		firstPageEl.style.cursor = "pointer";
+		firstPageEl.onclick = event => {
+			setCurrentPage(0);
+			refreshTable();
+		}
+		prevPageEl.style.cursor = "pointer";
+		prevPageEl.onclick = event => {
+				setCurrentPage(currentPage-1);
+				refreshTable();
+		}
+	} else { // first page, disable the first and prev buttons
+		firstPageEl.style.cursor = "not-allowed";
+		firstPageEl.onclick = () => false;
+		prevPageEl.style.cursor = "not-allowed";
+		prevPageEl.onclick = () => false;
 	}
 }
 
+const filterEl = document.getElementById("filter");
+filterEl.onkeyup = event => {
+	setCurrentPage(0);
+	refreshTable();
+}
 
 function main() {
 	setCurrentPage(0);
-	setupPaging();
 	setupSorting();
 	updateSortByEl(current_sort);
 	refreshTable();
