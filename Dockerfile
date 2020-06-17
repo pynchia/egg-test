@@ -9,6 +9,7 @@ RUN pip install --user -r requirements.txt
 COPY . /app
 # Install the application package
 RUN pip install --user .
+ENV PATH=/root/.local/bin:$PATH
 CMD ./run-tests.sh
 
 # the production image
