@@ -2,9 +2,11 @@ const usersURI = "http://localhost:8000/users";
 
 function refreshTable() {
 	const params = {
-		filter: document.getElementById("filter").value,
+		searchfilter: document.getElementById("filter").value,
 		sortby: current_sort.column,
-		sortdir: current_sort.direction
+		sortdir: current_sort.direction,
+		page: current_page,
+		pagesize: THEPAGESIZE
 	}
 	let rows = getData(usersURI, params);
 	rows.then(data => {
@@ -24,6 +26,8 @@ add_button.onclick = event => {
 	});
 }
 
+const THEPAGESIZE = 15;
+let current_page = 0;
 const current_sort = {
 	column: "name",
 	direction: "asc",

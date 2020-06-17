@@ -5,7 +5,7 @@ independent of kind of DB used
 """
 
 from abc import ABC, abstractmethod
-from typing import List, Protocol
+from typing import List, Protocol, Literal
 
 
 class SaveError(Exception):
@@ -41,21 +41,26 @@ class DBConnector(ABC):
         """
         Add the resource to the DB
         Params
-         resource = the resource itself
+         resource: the resource model
         Return:
-         the newly added resource
+         the newly added resource, as dict
         """
         ...
 
     @abstractmethod
-    async def read_many(self, criteria: dict, how_many: int, offset: int):
+    async def read_many(self,
+        search_filter:str, sort_by:str, sort_dir: Literal['asc', 'desc'],
+        page:int, pagesize:int) -> List[dict]:
         """
         Read the resources from the DB according to
-         the given criteria 
-         how many to retrieve
-         from a certain offset
+        Params
+            search_filter: the value to filter on the wanted columns
+            sort_by: the attribute to sort the results by (only one for now)
+            sort_dir: the direction of the sorting, "asc" or "desc"
+            page: the page to retrieve
+            pagesize: the number of entries per page
         Return:
-         the desired list of resources
+         The list of resources, as dicts
         """
         ...
 
@@ -73,7 +78,7 @@ class DBConnector(ABC):
 #     Instantiate with params:
 #     db uri or path
 #     """
-
+#
 #     # Note: Normally I would implement it as a Context manager
 #     # Need to investigate FastAPI/uvunicorn more deeply
 #     async def connect(self) -> None:
@@ -81,34 +86,39 @@ class DBConnector(ABC):
 #         Connect to the DB
 #         """
 #         ...
-
+#
 #     async def disconnect(self) -> None:
 #         """
 #         Close the connection if needed, tidy up
 #         """
 #         ...
-
+# 
 #     async def add(self, resource) -> dict:
 #         """
 #         Add the resource to the DB
 #         Params
-#          resource = the resource itself
+#          resource: the resource model
 #         Return:
-#          the newly added resource
+#          the newly added resource, as dict
 #         """
 #         ...
 
-#     async def read_many(self, criteria: dict, how_many: int, offset: int):
-#         """
-#         Read the resources from the DB according to
-#          the given criteria 
-#          how many to retrieve
-#          from a certain offset
+#     async def read_many(self,
+#        search_filter:str, sort_by:str, sort_dir: Literal['asc', 'desc'],
+#        page:int, pagesize:int) -> List[dict]:
+#        """
+#        Read the resources from the DB according to
+#        Params
+#            search_filter: the value to filter on the wanted columns
+#             sort_by: the attribute to sort the results by (only one for now)
+#             sort_dir: the direction of the sorting, "asc" or "desc"
+#             page: the page to retrieve
+#             pagesize: the number of entries per page
 #         Return:
-#          the desired list of resources
+#          The list of resources, as dicts
 #         """
 #         ...
-
+#
 #
 #
 # def implements(proto: Type):

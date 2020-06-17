@@ -32,9 +32,7 @@ async function getData(uri, params) {
         return "?"+formatted;
     }
 
-
     const response = await fetch(uri+formatParams());
-
     if (response.ok) { // HTTP-status is 200-299
         try {
             return await response.json();

@@ -7,13 +7,12 @@ from storage.connectors.sqllite import SQLiteUsers
 
 
 DATABASE_URI = 'sqlite:///./db/egg-test.db'
-PAGE_SIZE = 15
 
 
 def init_app():
     app = FastAPI()
     users_db_connector = SQLiteUsers(DATABASE_URI)
-    user_service = UserService(users_db_connector, PAGE_SIZE)
+    user_service = UserService(users_db_connector)
     register_static_handlers(app)
     register_user_handlers(app, user_service)
 
