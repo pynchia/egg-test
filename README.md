@@ -1,6 +1,9 @@
 # egg-test
 
-A test
+A fullstack test to enter data in a DB, populate a table, sort it by column and filter it.
+
+The backend is done with FastAPI and sqlalchemy and it offers a simple REST API.
+
 
 ## Setup and execution of the tests
 
